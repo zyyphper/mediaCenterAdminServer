@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3bae8d6fd17ad3414278f8b1ffe7288a",
+    "content-hash": "f0707ee749d9f71658228c670ed4f444",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1376,16 +1376,16 @@
         },
         {
             "name": "laravel-admin-customize-ext/org_rbac",
-            "version": "v0.0.3",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zyyphper/org-rbac.git",
-                "reference": "09006d35f7818eb167409116950a2ff79ea9b958"
+                "reference": "a7cb537f9dc025fe023d48c3bf6cc5a122400738"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zyyphper/org-rbac/zipball/09006d35f7818eb167409116950a2ff79ea9b958",
-                "reference": "09006d35f7818eb167409116950a2ff79ea9b958",
+                "url": "https://api.github.com/repos/zyyphper/org-rbac/zipball/a7cb537f9dc025fe023d48c3bf6cc5a122400738",
+                "reference": "a7cb537f9dc025fe023d48c3bf6cc5a122400738",
                 "shasum": ""
             },
             "require": {
@@ -1426,9 +1426,9 @@
             ],
             "support": {
                 "issues": "https://github.com/zyyphper/org-rbac/issues",
-                "source": "https://github.com/zyyphper/org-rbac/tree/v0.0.3"
+                "source": "https://github.com/zyyphper/org-rbac/tree/v1.0.1"
             },
-            "time": "2023-09-14T05:13:00+00:00"
+            "time": "2023-09-14T07:43:43+00:00"
         },
         {
             "name": "laravel/framework",
