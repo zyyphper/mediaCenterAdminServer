@@ -5,8 +5,9 @@ namespace App\Models\Material;
 
 
 use App\Libraries\Base\BaseModel;
-use App\Models\Admin\Platform;
+use Encore\OrgRbac\Models\Platform;
 use App\Models\Admin\PlatformUser;
+use Encore\OrgRbac\Models\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FileSource extends BaseModel
@@ -32,7 +33,7 @@ class FileSource extends BaseModel
 
     public function operator()
     {
-        return $this->belongsTo(PlatformUser::class);
+        return $this->belongsTo(User::class);
     }
 
     public function groups()

@@ -5,8 +5,8 @@ namespace App\Models\Material;
 
 
 use App\Libraries\Base\BaseModel;
-use App\Models\Admin\Platform;
-use App\Models\Admin\PlatformUser;
+use Encore\OrgRbac\Models\Platform;
+use Encore\OrgRbac\Models\User;
 
 class FileTemplate extends BaseModel
 {
@@ -30,7 +30,7 @@ class FileTemplate extends BaseModel
 
     public function operator()
     {
-        return $this->belongsTo(PlatformUser::class);
+        return $this->belongsTo(User::class);
     }
 
     public function groups()

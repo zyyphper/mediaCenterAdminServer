@@ -5,8 +5,7 @@ namespace App\Models\Material;
 
 
 use App\Libraries\Base\BaseModel;
-use App\Models\Admin\Platform;
-use App\Models\Admin\PlatformUser;
+use Encore\OrgRbac\Models\Platform;
 
 class FileGroup extends BaseModel
 {

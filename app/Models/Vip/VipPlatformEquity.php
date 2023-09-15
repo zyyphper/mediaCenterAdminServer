@@ -5,6 +5,7 @@ namespace App\Models\Vip;
 
 
 use App\Libraries\Base\BaseModel;
+use Encore\OrgRbac\Models\Platform;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class VipPlatformEquity extends BaseModel
@@ -23,8 +24,7 @@ class VipPlatformEquity extends BaseModel
      */
     public function platform() : BelongsTo
     {
-        $platformModel = config('admin.database.platforms_model');
-        return $this->belongsTo($platformModel,'platform_id','id');
+        return $this->belongsTo(Platform::class,'platform_id','id');
     }
 
     public function equity() : BelongsTo
