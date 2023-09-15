@@ -10,10 +10,11 @@ use App\Models\Material\Enums\FileOriginType;
 use App\Models\Material\Enums\FileType;
 use App\Models\Material\FileSource;
 use Encore\Admin\Table;
+use Encore\OrgRbac\Traits\PlatformPermission;
 
 class SourceController extends BaseAdminController
 {
-
+    use PlatformPermission;
     /**
      * Title for current resource.
      *
@@ -44,11 +45,9 @@ class SourceController extends BaseAdminController
         $table->disableCreateButton();
 
         $table->column('id', '文件资源ID');
-        if ($this->isRootPlatform()) {
-            $table->platform()->name("平台");
-        }
+        $this->platformAuth($table);
         $table->groups()->name("分组集合");
-        $table->column('name', '文件名称')->editable();
+        $table->column('name', '文件名称');
         $table->column('type','文件类型')->using(FileType::$texts);
         $table->column('origin_type', '来源类型')->using(FileOriginType::$texts);
 

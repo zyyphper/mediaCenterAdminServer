@@ -9,9 +9,11 @@ use App\Models\Material\FileGroup;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Table;
+use Encore\OrgRbac\Traits\PlatformPermission;
 
 class GroupController extends BaseAdminController
 {
+    use PlatformPermission;
     /**
      * Title for current resource.
      *
@@ -28,7 +30,7 @@ class GroupController extends BaseAdminController
     }
     /**
      * 表格
-     * @return Grid
+     * @return Table
      * @throws \Exception
      */
     protected function table()
@@ -39,9 +41,7 @@ class GroupController extends BaseAdminController
         $table->disableExport();
 
         $table->column('id', '分组ID');
-        if ($this->isRootPlatform()) {
-            $table->platform()->name("平台");
-        }
+        $this->platformAuth($table);
         $table->column('name', '名称')->editable();
 
         $table->column('created_at', '创建时间');
@@ -56,10 +56,10 @@ class GroupController extends BaseAdminController
     public function form()
     {
         $form = new Form($this->model);
+        $this->platformAuth($form);
         $form->text("name","分组描述");
         $form->saving(function (Form $form) {
             if ($form->isCreating()) $form->model()->id = app("snowFlake")->id;
-            $form->model()->platform_id = Admin::user()->platform_id;
         });
         return $form;
     }

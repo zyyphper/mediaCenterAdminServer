@@ -13,10 +13,11 @@ use App\Models\Vip\VipEquity;
 use App\Services\Vip\VipPlatformEquityService;
 use Encore\Admin\Table;
 use Encore\Admin\Layout\Content;
+use Encore\OrgRbac\Traits\PlatformPermission;
 
 class TemplateController extends BaseAdminController
 {
-
+    use PlatformPermission;
     /**
      * Title for current resource.
      *
@@ -47,9 +48,8 @@ class TemplateController extends BaseAdminController
         $table->disableCreateButton();
 
         $table->column('id', '模板ID');
-        if ($this->isRootPlatform()) {
-            $table->platform()->name("平台");
-        }
+        $this->platformAuth($table);
+
         $table->column('groups','分组集合')->display(function ($groups) {
 
             $groups = array_map(function ($group) {
@@ -58,7 +58,7 @@ class TemplateController extends BaseAdminController
 
             return join('&nbsp;', $groups);
         });
-        $table->column('name', '模板名称')->editable();
+        $table->column('name', '模板名称');
         $table->column('type','文件类型')->using(FileType::$texts);
 
         $status = [

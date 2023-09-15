@@ -2,14 +2,14 @@
 
 namespace App\Admin\Extensions\Tools;
 
-use App\Libraries\Base\Platform;
 use App\Models\Material\FileGroup;
 use Encore\Admin\Actions\Action;
-use \App\Models\Admin\Platform AS PlatformModel;
+use Encore\Admin\Admin;
+use Encore\OrgRbac\Traits\PlatformPermission;
 
 class MaterialExportTool extends Action
 {
-    use Platform;
+    use PlatformPermission;
 
     public $name = '导出数据';
     protected $selector = '.export-post';
@@ -21,7 +21,7 @@ class MaterialExportTool extends Action
 
     public function form()
     {
-        if ($this->isRootPlatform()) {
+        if (Admin::user()->isRootAdministrator()) {
             $this->select('platform_id', '平台')->options(function () {
                 return PlatformModel::pluck('name', 'id');
             })->required();
