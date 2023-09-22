@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class VipPlatformEquity extends BaseModel
 {
     protected $connection = "member";
+    protected $table = "vip_platform_equity";
 
     protected $fillable = [
         'equity_id',
