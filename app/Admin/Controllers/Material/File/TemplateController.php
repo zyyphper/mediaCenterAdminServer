@@ -13,6 +13,7 @@ use App\Models\Vip\VipEquity;
 use App\Services\Vip\VipPlatformEquityService;
 use Encore\Admin\Table;
 use Encore\Admin\Layout\Content;
+use Encore\OrgRbac\Models\Enums\IsAdmin;
 use Encore\OrgRbac\Traits\PlatformPermission;
 
 class TemplateController extends BaseAdminController
@@ -41,6 +42,12 @@ class TemplateController extends BaseAdminController
     {
         $table = new Table($this->model);
         $table->model()->latest();
+        $table->filter(function($filter){
+            $filter->disableIdFilter();
+            $filter->equal('platform_id')
+                ->select($this->model()->where('is_admin',IsAdmin::NO)->get()->pluck('name','id'))
+                ->hidden();
+        });
 
         $table->tools(function ($tools) use ($table) {
             $tools->append(new MaterialFileImportTool());
@@ -116,6 +123,7 @@ class TemplateController extends BaseAdminController
      */
     public function importPage(Content $content,VipPlatformEquityService $equityService)
     {
+
         //获取当前用户剩余存储空间
         $spaceCapacityNum = $equityService->getEquityById(VipEquity::SPACE_CAPACITY,
             EquityUnit::load(EquityUnit::SPACE_CAPACITY)->KB
