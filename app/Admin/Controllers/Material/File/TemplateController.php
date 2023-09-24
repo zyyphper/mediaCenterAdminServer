@@ -44,9 +44,12 @@ class TemplateController extends BaseAdminController
         $table->model()->latest();
         $table->filter(function($filter){
             $filter->disableIdFilter();
-            $filter->equal('platform_id')
-                ->select($this->model()->where('is_admin',IsAdmin::NO)->get()->pluck('name','id'))
-                ->hidden();
+            $filter->where(function ($query) {
+                $query->equal('platform_id')
+                    ->select($this->model()->where('is_admin',IsAdmin::NO)->get()->pluck('name','id'));
+                var_dump($this->input);
+            });
+
         });
 
         $table->tools(function ($tools) use ($table) {
