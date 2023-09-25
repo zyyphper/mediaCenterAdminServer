@@ -42,16 +42,16 @@ class TemplateController extends BaseAdminController
     {
         $table = new Table($this->model);
         $table->model()->latest();
-        $platformData = $this->model()->where('is_admin',IsAdmin::NO)->get()->pluck('name','id');
+        $platformData = $this->model()->get()->pluck('name','id');
         $table->filter(function ($filter) use($platformData) {
             $filter->disableIdFilter();
             $filter->where(function ($query) {
                 $this->platformId = $this->input;
                 $query->where('platform_id',$this->platformId);
-            },'平台', 'platform_id')->select($platformData);
+            },'平台', 'platform_id')->select($platformData)->default($this->platformId);
         });
         $table->filter(function ($filter) use($platformData) {
-            $filter->equal('type')->radio(FileType::$texts);
+            $filter->equal('file_type')->radio(FileType::$texts);
         });
 
         $table->tools(function ($tools) use ($table) {
@@ -71,7 +71,7 @@ class TemplateController extends BaseAdminController
             return join('&nbsp;', $groups);
         });
         $table->column('name', '模板名称');
-        $table->column('type','文件类型')->using(FileType::$texts);
+        $table->column('file_type','文件类型')->using(FileType::$texts);
 
         $status = [
             'on' => ['value'=>1,'text'=>'启用','color'=>'primary'],
