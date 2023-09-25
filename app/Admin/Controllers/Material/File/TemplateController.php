@@ -47,7 +47,7 @@ class TemplateController extends BaseAdminController
             $filter->where(function ($query) {
                 $this->platformId = $this->input;
                 $query->where('platform_id',$this->platformId);
-            })->select($this->model()->where('is_admin',IsAdmin::NO)->get()->pluck('name','id'));
+            },'平台', 'platform_id')->select($this->model()->where('is_admin',IsAdmin::NO)->get()->pluck('name','id'));
         });
 
         $table->tools(function ($tools) use ($table) {
