@@ -42,12 +42,13 @@ class TemplateController extends BaseAdminController
     {
         $table = new Table($this->model);
         $table->model()->latest();
-        $table->filter(function($filter){
+        $platformData = $this->model()->where('is_admin',IsAdmin::NO)->get()->pluck('name','id');
+        $table->filter(function ($filter) use($platformData) {
             $filter->disableIdFilter();
             $filter->where(function ($query) {
                 $this->platformId = $this->input;
                 $query->where('platform_id',$this->platformId);
-            },'平台', 'platform_id')->select($this->model()->where('is_admin',IsAdmin::NO)->get()->pluck('name','id'));
+            },'平台', 'platform_id')->select($platformData);
         });
 
         $table->tools(function ($tools) use ($table) {
