@@ -50,6 +50,9 @@ class TemplateController extends BaseAdminController
                 $query->where('platform_id',$this->platformId);
             },'平台', 'platform_id')->select($platformData);
         });
+        $table->filter(function ($filter) use($platformData) {
+            $filter->equal('type')->radio(FileType::$texts);
+        });
 
         $table->tools(function ($tools) use ($table) {
             $tools->append(new MaterialFileImportTool());
